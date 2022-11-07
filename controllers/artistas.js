@@ -85,7 +85,7 @@ const getAlbumesByArtista = (req, res) => {
 const getCancionesByArtista = (req, res) => {
     conn.query("SELECT canciones.id, canciones.nombre, artistas.nombre AS NOM_ART, albumes.nombre AS NOM_ALB, canciones.duracion, canciones.reproducciones FROM canciones JOIN albumes ON canciones.album = albumes.id JOIN artistas ON albumes.artista = artistas.id AND artistas.id=?", req.params["id"], (err, result) => {
         res.json(result);
-    });
+    })
     // Completar con la consulta que devuelve las canciones de un artista
     // (tener en cuenta que las canciones están asociadas a un álbum, y los álbumes a un artista)
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
