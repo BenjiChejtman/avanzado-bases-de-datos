@@ -18,6 +18,7 @@ app.get("/", (_, res) => {
 
 app.get("/artistas", artistas.getArtistas);
 app.get("/albumes/:id/canciones", albumes.getCancionesByAlbum)
+app.get("/artistas/:id", albumes.)
 // Completar con las rutas de artistas
 // Para acceder a cada funcion de artistas, se debe hacer de la siguiente forma:
 // artistas.getArtistas;
