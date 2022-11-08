@@ -1,7 +1,7 @@
 const conn = require("../db");
 
 const getCanciones = (_, res) => {
-    conn.query("SELECT canciones.id, canciones.nombre, artista.nombre AS NOM_ART, albumes.nombre AS ALB_NOM, canciones.reproducciones, canciones.duracion FROM canciones JOIN albumes ON albumes.id = canciones.album JOIN artistas ON artistas.id = albumes.artista", (err, result) => {
+    conn.query("SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.reproducciones, canciones.duracion FROM canciones JOIN albumes ON  albumes.id = canciones.album JOIN artistas ON artistas.id = albumes.artista", (err, result) => {
         res.json(result);
     });
     // Completar con la consulta que devuelve todas las canciones
@@ -31,7 +31,7 @@ const getCanciones = (_, res) => {
 };
 
 const getCancion = (req, res) => {
-    conn.query("SELECT canciones.id, canciones.nombre, artistas.nombre AS NOM_ART, albumes.nombre AS NOM_ALB, canciones.reproducciones, canciones.duracion FROM canciones JOIN albumes ON  albumes.id = canciones.album JOIN artistas ON artistas.id = albumes.artista WHERE canciones.id= ?", req.params["id"], (err,result)=>{
+    conn.query("SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.reproducciones, canciones.duracion FROM canciones JOIN albumes ON  albumes.id = canciones.album JOIN artistas ON artistas.id = albumes.artista WHERE canciones.id= ?", req.params["id"], (err,result)=>{
         res.json(result);
     });
     // Completar con la consulta que devuelve una canción
@@ -50,7 +50,8 @@ const getCancion = (req, res) => {
 };
 
 const createCancion = (req, res) => {
-    conn.query("INSERT INTO canciones (nombre, album, duarcion) values (?,?,?)", [req.body.nombre, req.body.album, req.body.duracion], (err,result)=>{
+    conn.query("INSERT INTO canciones (nombre, album, duracion) VALUES (?,?,?)", [req.body.nombre, req.body.album, req.body.duracion], (err,result)=>{
+        if (err) res.send(err);
         res.send("Cancion creada de manera exitosa");
     })
     // Completar con la consulta que crea una canción
@@ -67,7 +68,7 @@ const createCancion = (req, res) => {
 };
 
 const updateCancion = (req, res) => {
-    conn.query("UPDATE canciones SET nombre = ?, album=?, duracion=? WHERE id=?", [req.body.nombre, req.body.artista, req.body.duracion, req.params['id']], (err, result)=>{
+    conn.query("UPDATE canciones SET nombre = ?, album=?, duracion=? WHERE id=?", [req.body.nombre, req.body.album, req.body.duracion, req.params['id']], (err, result)=>{
         res.send("Cancion actualizada de manera exitosa");
     });
     // Completar con la consulta que actualiza una canción
@@ -84,7 +85,7 @@ const updateCancion = (req, res) => {
 };
 
 const deleteCancion = (req, res) => {
-    conn.query("DELETE FROM canciones WHERE id=?", req.params['id'], (err, result)=>{
+    conn.query("DELETE FROM canciones WHERE id=?", req.params['id'], (err, result)=>{       //eliminamos determinada cancion de la bdd
         res.send("Cancion eliminada de forma exitosa");
     });
     // Completar con la consulta que elimina una canción

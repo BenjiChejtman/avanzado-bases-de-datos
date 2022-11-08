@@ -12,7 +12,7 @@ POST http://localhost:3000/artistas HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Artista 3"
+  "nombre":"Artista 1"
 }
 
 ### Actualizar un artista
@@ -21,12 +21,12 @@ PUT http://localhost:3000/artistas/3 HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Artista 2"
+  "nombre": "Artista 1"
 }
 
 ### Eliminar un artista
 
-DELETE http://localhost:3000/artistas/2 HTTP/1.1
+DELETE http://localhost:3000/artistas/9 HTTP/1.1
 
 ### Obtener albumes
 
@@ -42,23 +42,23 @@ POST http://localhost:3000/albumes HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Album 2",
-  "artista": 3
+  "nombre": "Album 49",
+  "artista": 5
 }
 
 ### Actualizar un album
 
-PUT http://localhost:3000/albumes/2 HTTP/1.1
+PUT http://localhost:3000/albumes/11 HTTP/1.1
 Content-Type: application/json
 
 {
   "nombre": "Album 5",
-  "artista": 1
+  "artista": 3
 }
 
 ### Eliminar un album
 
-DELETE http://localhost:3000/albumes/2 HTTP/1.1
+DELETE http://localhost:3000/albumes/11 HTTP/1.1
 
 ### Obtener canciones
 
@@ -74,29 +74,29 @@ POST http://localhost:3000/canciones HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Cancion 3",
-  "album": 2,
-  "duracion": 260
+  "nombre": "Desaparezco Remix ft. Chona",
+  "album": 5,
+  "duracion": 265
 }
 
 ### Actualizar una cancion
 
-PUT http://localhost:3000/canciones/3 HTTP/1.1
+PUT http://localhost:3000/canciones/11 HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Cancion 3",
-  "album": 1,
-  "duracion": 260
+  "nombre": "Pasilleando ando ft. Ivo",
+  "album": 3,
+  "duracion": 280
 }
 
 ### Eliminar una cancion
 
-DELETE http://localhost:3000/canciones/3 HTTP/1.1
+DELETE http://localhost:3000/canciones/11 HTTP/1.1
 
 ### Reproducir una cancion
 
-PUT http://localhost:3000/canciones/1/reproducir HTTP/1.1
+PUT http://localhost:3000/canciones/12/reproducir HTTP/1.1
 
 ### Obtener canciones de un album
 

@@ -1,7 +1,7 @@
 const conn = require("../db");
 
 const getArtistas = (_, res) => {
-    conn.query("SELECT * FROM artistas", (err, result) =>{
+    conn.query("SELECT * FROM artistas", (err, result) =>{              //hacemos un SELECT porque queremos obtener ciertos datos de la tabla
         res.json(result);
     });
     // Completar con la consulta que devuelve todos los artistas
@@ -38,7 +38,7 @@ const getArtista = (req, res) => {
 };
 
 const createArtista = (req, res) => {
-    conn.query("INSTERT INTO artistas (nombre) VALUES (?)", req.body.nombre, (err, result) => {
+    conn.query("INSERT INTO artistas (nombre) VALUES (?)", req.body.nombre, (err, result) => {  //como nuestro objetivo es que se cree algo en la bdd, tenemos que hacer un INSERT INTO
         res.send("Artista Creado de forma exitosa")
     });
     // Completar con la consulta que crea un artista
@@ -52,7 +52,7 @@ const createArtista = (req, res) => {
 };
 
 const updateArtista = (req, res) => {
-    conn.query("UPDATE artistas SET nombre=? WHERE id=?", [req.body.nombre, req.params["id"]], (err, result) => {
+    conn.query("UPDATE artistas SET nombre=? WHERE id=?", [req.body.nombre, req.params.id], (err, result) => {      //como hay que actualizar datos, el UPDATE es lo que debemos usar
         res.send("Artista actualizado de manera exitosa");
     })
     // Completar con la consulta que actualiza un artista
@@ -66,7 +66,7 @@ const updateArtista = (req, res) => {
 };
 
 const deleteArtista = (req, res) => {
-    conn.query("DELETE FROM artistas WHERE id=?", req.params["id"], (err, result) => {
+    conn.query("DELETE FROM artistas WHERE id=?", req.params["id"], (err, result) => {      //para borrar algo de la bdd debemos hacer un DELETE
         res.send("Artista borrado de manera exitosa")
     });
     // Completar con la consulta que elimina un artista
@@ -74,7 +74,7 @@ const deleteArtista = (req, res) => {
 };
 
 const getAlbumesByArtista = (req, res) => {
-    conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre as NOM_ART FROM albumes JOIN artistas ON albumes.artista = artistas.id AND artistas.id=?", req.params["id"], (err, result) => {
+    conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre as nombre_artista FROM albumes JOIN artistas ON albumes.artista = artistas.id AND artistas.id=?", req.params["id"], (err, result) => {       
         res.json(result);
     });
     // Completar con la consulta que devuelve las canciones de un artista 
@@ -83,7 +83,7 @@ const getAlbumesByArtista = (req, res) => {
 };
 
 const getCancionesByArtista = (req, res) => {
-    conn.query("SELECT canciones.id, canciones.nombre, artistas.nombre AS NOM_ART, albumes.nombre AS NOM_ALB, canciones.duracion, canciones.reproducciones FROM canciones JOIN albumes ON canciones.album = albumes.id JOIN artistas ON albumes.artista = artistas.id AND artistas.id=?", req.params["id"], (err, result) => {
+    conn.query("SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.duracion, canciones.reproducciones FROM canciones JOIN albumes ON canciones.album = albumes.id JOIN artistas ON albumes.artista = artistas.id AND artistas.id=?", req.params["id"], (err, result) => {
         res.json(result);
     })
     // Completar con la consulta que devuelve las canciones de un artista

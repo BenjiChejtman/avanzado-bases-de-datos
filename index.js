@@ -16,12 +16,12 @@ app.get("/", (_, res) => {
 
 // Artistas
 app.get("/artistas", artistas.getArtistas);
-app.get("/artistas/:id", albumes.getArtista);
+app.get("/artistas/:id", artistas.getArtista);
 app.post("/artistas", artistas.createArtista);
-app.put("artistas/:id", artistas.updateArtista);
-app.delete("artistas/:id", artistas.deleteArtista);
-app.get("/artistas/:id/albumes", albumes.getAlbumesByArtista);
-app.get("/artistas/:id/canciones", albumes.getCancionesByArtista);
+app.put("/artistas/:id", artistas.updateArtista);
+app.delete("/artistas/:id", artistas.deleteArtista);
+app.get("/artistas/:id/albumes", artistas.getAlbumesByArtista);
+app.get("/artistas/:id/canciones", artistas.getCancionesByArtista);
 
 //Álbumes
 app.get("/albumes", albumes.getAlbumes);
@@ -37,7 +37,7 @@ app.get("/canciones/:id", canciones.getCancion);
 app.post("/canciones", canciones.createCancion);
 app.put("/canciones/:id", canciones.updateCancion);
 app.delete("/canciones/:id", canciones.deleteCancion);
-app.put("/canciones/:id/reproducciones", canciones.reproducirCancion);
+app.put("/canciones/:id/reproducir", canciones.reproducirCancion);
 
 
 // Completar con las rutas de artistas

@@ -1,7 +1,7 @@
 const conn = require("../db");
 
 const getAlbumes = (_, res) => {
-    conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS NOM_ART FROM albumes JOIN artistas ON albumes.artista=artistas.id", (err,result)=>{
+    conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes JOIN artistas ON albumes.artista=artistas.id", (err,result)=>{
         res.json(result);
     });
     // Completar con la consulta que devuelve todos los albumes
@@ -25,7 +25,7 @@ const getAlbumes = (_, res) => {
 };
 
 const getAlbum = (req, res) => {
-    conn.query("SELECT albumes.id, albumes.nombre as NOM_ALB, artistas.nombre AS NOM_ART FROM albumes JOIN artistas ON artistas.id = albumes.artista AND albumes.id=?", [req.params['id']], (err, result)=>{
+    conn.query("SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes JOIN artistas ON artistas.id = albumes.artista AND albumes.id=?", [req.params['id']], (err, result)=>{
         res.json(result);
     });
     // Completar con la consulta que devuelve un album por id
@@ -80,7 +80,7 @@ const deleteAlbum = (req, res) => {
 
 const getCancionesByAlbum = (req, res) => {
     const albumID = req.params.id;
-    conn.query("SELECT canciones.id, canciones.nombre, albumes.nombre AS NOM_ALB, artistas.nombre AS NOM_ART, canciones.duracion, canciones.reproducciones FROM artistas JOIN albumes ON albumes.artista = artistas.id JOIN canciones ON canciones.album = albumes.id WHERE albumes.id = '"+ albumID +"'", (err, result)=>{
+    conn.query("SELECT canciones.id, canciones.nombre, albumes.nombre AS nombre_album, artistas.nombre AS nombre_artista, canciones.duracion, canciones.reproducciones FROM artistas JOIN albumes ON albumes.artista = artistas.id JOIN canciones ON canciones.album = albumes.id WHERE albumes.id = '"+ albumID +"'", (err, result)=>{
         res.send(result);
     });
     // Completar con la consulta que devuelve las canciones de un album
